@@ -34,6 +34,10 @@ if allowed_hosts_env:
 else:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+# DEBUG: Print to logs
+print(f"DEBUG: ALLOWED_HOSTS environment variable: {allowed_hosts_env}")
+print(f"DEBUG: Parsed ALLOWED_HOSTS: {ALLOWED_HOSTS}")
+
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
