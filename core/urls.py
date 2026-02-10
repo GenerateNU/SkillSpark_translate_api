@@ -1,5 +1,4 @@
 """core URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
@@ -15,12 +14,18 @@ Including another URLconf
 """
 from django.conf.urls import handler404
 from django.urls import path
+from django.http import HttpResponse
 from index.views import Index
 from translate.views import Languages, Translate
 
 handler404 = "index.views.page_not_found_view"
 
+def health_check(request):
+    from django.conf import settings
+    return HttpResponse(f"OK - ALLOWED_HOSTS: {settings.ALLOWED_HOSTS}", status=200)
+
 urlpatterns = [
+    path("health/", health_check, name="health"),
     path("", Index.as_view(), name="index"),
     path("translate", Translate.as_view(), name="translate"),
     path("languages", Languages.as_view(), name="languages"),
